@@ -1,0 +1,70 @@
+# Room Rent Calculator Project
+
+
+def input_details():
+"""Collects and validates all user inputs."""
+while True:
+try:
+rent = float(input("Enter total monthly rent: "))
+food = float(input("Enter total food cost: "))
+units = float(input("Enter total electricity units consumed: "))
+rate = float(input("Enter charge per electricity unit: "))
+persons = int(input("Enter number of persons sharing room: "))
+
+
+if rent < 0 or food < 0 or units < 0 or rate < 0 or persons <= 0:
+print("Invalid input! Values cannot be negative and persons must be > 0. Try again.\n")
+continue
+
+
+return rent, food, units, rate, persons
+
+
+except ValueError:
+print("Invalid input! Please enter numeric values. Try again.\n")
+
+
+
+
+def calculate_electricity(units, rate):
+return units * rate
+
+
+
+
+def calculate_total(rent, food, electricity):
+return rent, food + electricity
+
+
+
+
+def split_bill(total, persons):
+return total / persons
+
+
+
+
+def main():
+print("===== ROOM RENT CALCULATOR =====")
+
+
+rent, food, units, rate, persons = input_details()
+
+
+electricity_bill = calculate_electricity(units, rate)
+total_bill = rent + food + electricity_bill
+per_person = split_bill(total_bill, persons)
+
+
+print("\n===== FINAL OUTPUT =====")
+print(f"Total Rent: ₹{rent}")
+print(f"Food Cost: ₹{food}")
+print(f"Electricity Bill: ₹{electricity_bill}")
+print(f"Total Monthly Bill: ₹{total_bill}")
+print(f"Each Person Should Pay: ₹{per_person:.2f}")
+
+
+
+
+if __name__ == "__main__":
+main()
